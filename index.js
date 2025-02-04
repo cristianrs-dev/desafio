@@ -1,4 +1,4 @@
-/*
+
 //desafio 1
 let INDICE = 13;
 let SOMA = 0;
@@ -35,7 +35,7 @@ const numero = 21;
 if (isFibonacci(numero)) 
     console.log(`${numero} pertence à sequência`)
 
-*/
+
 
 //desafio 3
 const fs = require('fs');
@@ -74,7 +74,7 @@ fs.readFile('dados.json', 'utf8', (err, data) => {
   }
 });
 
-/*
+
 //desafio 4
 const faturamento = {
     "SP": 67836.43,
@@ -113,4 +113,3 @@ const resultado = inverterString(texto);
 
 console.log("String original:", texto);
 console.log("String invertida:", resultado);
-*/
