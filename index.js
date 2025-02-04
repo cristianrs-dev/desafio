@@ -1,4 +1,4 @@
-
+/*
 //desafio 1
 let INDICE = 13;
 let SOMA = 0;
@@ -35,37 +35,46 @@ const numero = 21;
 if (isFibonacci(numero)) 
     console.log(`${numero} pertence à sequência`)
 
-
+*/
 
 //desafio 3
-const faturamentoMensal = {
-  "faturamento": [
-    2500, 3000, 1000, 0, 5000, 7000, 0, 2000, 4500, 0,
-    0, 3200, 4100, 5300, 6200, 0, 3100, 2700, 0, 3800,
-    4900, 5700, 6000, 0, 3300, 5100, 7000, 8100, 0, 2900
-  ]
-};
+const fs = require('fs');
 
-// Filtrar os dias com faturamento maior que zero
-const valoresValidos = faturamentoMensal.faturamento.filter(valor => valor > 0);
+// Carregar os dados do arquivo JSON
+fs.readFile('dados.json', 'utf8', (err, data) => {
+  if (err) {
+    console.error('Erro ao ler o arquivo JSON:', err);
+    return;
+  }
 
-// Encontrar menor e maior valor de faturamento
-const menorValor = Math.min(...valoresValidos);
-const maiorValor = Math.max(...valoresValidos);
+  try {
+    // Parse do JSON para transformar em objeto JavaScript
+    const faturamentoMensal = JSON.parse(data);
 
-// Calcular a média mensal excluindo os dias sem faturamento
-const soma = valoresValidos.reduce((acc, valor) => acc + valor, 0);
-const mediaMensal = soma / valoresValidos.length;
+    // Filtrar os dias com faturamento maior que zero
+    const valoresValidos = faturamentoMensal.filter(item => item.valor > 0).map(item => item.valor);
 
-// Contar os dias acima da média
-const diasAcimaDaMedia = valoresValidos.filter(valor => valor > mediaMensal).length;
+    // Encontrar menor e maior valor de faturamento
+    const menorValor = Math.min(...valoresValidos);
+    const maiorValor = Math.max(...valoresValidos);
 
-// Exibir resultados
-console.log(`Menor faturamento: ${menorValor}`);
-console.log(`Maior faturamento: ${maiorValor}`);
-console.log(`Dias com faturamento acima da média: ${diasAcimaDaMedia}`);
+    // Calcular a média mensal excluindo os dias sem faturamento
+    const soma = valoresValidos.reduce((acc, valor) => acc + valor, 0);
+    const mediaMensal = soma / valoresValidos.length;
 
+    // Contar os dias acima da média
+    const diasAcimaDaMedia = valoresValidos.filter(valor => valor > mediaMensal).length;
 
+    // Exibir resultados
+    console.log(`Menor faturamento: ${menorValor}`);
+    console.log(`Maior faturamento: ${maiorValor}`);
+    console.log(`Dias com faturamento acima da média: ${diasAcimaDaMedia}`);
+  } catch (e) {
+    console.error('Erro ao processar os dados JSON:', e);
+  }
+});
+
+/*
 //desafio 4
 const faturamento = {
     "SP": 67836.43,
@@ -104,3 +113,4 @@ const resultado = inverterString(texto);
 
 console.log("String original:", texto);
 console.log("String invertida:", resultado);
+*/
